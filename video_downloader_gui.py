@@ -8,7 +8,7 @@ from yt_dlp import YoutubeDL
 
 def get_app_folder():
     if getattr(sys, "frozen", False):
-        return sys._MEIPASS
+        return os.path.dirname(sys.executable)
 
     return os.path.dirname(
         os.path.abspath(__file__)
@@ -19,7 +19,13 @@ APP_FOLDER = get_app_folder()
 
 FFMPEG_PATH = os.path.join(
     APP_FOLDER,
-    "ffmpeg.exe"
+    "ffmpeg"
+)
+
+if os.name == "nt":
+    FFMPEG_PATH = os.path.join(
+        APP_FOLDER,
+        "ffmpeg.exe"
 )
     
 class VideoDownloaderApp:
